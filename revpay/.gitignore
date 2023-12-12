@@ -35,3 +35,10 @@ build/
 
 
 *.properties
+
+target/
+*.JAR
+*.WAR
+*.EAR
+
+*.class
