@@ -7,19 +7,16 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.revpay.entities.User;
-import com.revature.revpay.repositories.CreditRepository;
 import com.revature.revpay.repositories.UserRepository;
 
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 public class UserService {
     private final UserRepository userRepository;
-    private final CreditRepository creditRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, CreditRepository creditRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.creditRepository = creditRepository;
     }
 
     public User findUserById(Integer user_id) {
