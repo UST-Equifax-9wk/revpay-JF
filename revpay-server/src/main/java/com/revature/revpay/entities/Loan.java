@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -15,41 +16,53 @@ import jakarta.persistence.Table;
 public class Loan {
 
     @Id
-    @Column(name = "loan_id")
+    @Column(name = "loanId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer loan_id;
+    private Integer loanId;
 
     @ManyToOne
-    @Column(name = "account_id", nullable = false)
+    @JoinColumn(name = "accountId", nullable = false)
     @JsonBackReference
-    private Account account_id;
+    private Account accountId;
 
-    @Column(name = "loan_amount", nullable = false)
-    private Double loan_amount;
+    @Column(name = "loanAmount", nullable = false)
+    private Double loanAmount;
 
-    @Column(name = "loan_status", nullable = false)
-    private String loan_status; //approved, denied, pending
+    @Column(name = "loanStatus", nullable = false)
+    private String loanStatus; //approved, denied, pending
 
-    @Column(name = "loan_date", nullable = false)
-    private String loan_date;
+    @Column(name = "loanDate", nullable = false)
+    private String loanDate;
 
-    @Column(name = "interest_rate", nullable = false)
-    private Double interest_rate;
+    @Column(name = "interestRate", nullable = false)
+    private Double interestRate;
 
-    @Column(name = "start_date", nullable = false)
-    private String start_date;
+    @Column(name = "startDate", nullable = false)
+    private String startDate;
 
-    @Column(name = "due_date", nullable = false)
-    private String due_date;
+    @Column(name = "dueDate", nullable = false)
+    private String dueDate;
 
     public Loan(Integer loan_id, Account account_id, Double loan_amount, String loan_status, String loan_date, Double interest_rate, String start_date, String due_date) {
-        this.loan_id = loan_id;
-        this.account_id = account_id;
-        this.loan_amount = loan_amount;
-        this.loan_status = loan_status;
-        this.loan_date = loan_date;
-        this.interest_rate = interest_rate;
-        this.start_date = start_date;
-        this.due_date = due_date;
+        this.loanId = loan_id;
+        this.accountId = account_id;
+        this.loanAmount = loan_amount;
+        this.loanStatus = loan_status;
+        this.loanDate = loan_date;
+        this.interestRate = interest_rate;
+        this.startDate = start_date;
+        this.dueDate = due_date;
+    }
+
+    public Loan() {
+    }
+
+    public void setId(int i) {
+    }
+
+    public void setAccountId(int i) {
+    }
+
+    public void setAmount(double d) {
     }
 }

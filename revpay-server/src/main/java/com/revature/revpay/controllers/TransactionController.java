@@ -1,8 +1,7 @@
 package com.revature.revpay.controllers;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +25,9 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping
-    public List<Transaction> getAllTransactions() {
-        return transactionService.getAllTransactions();
+    @GetMapping("/{accountNumber}")
+    public Set<Transaction> getAllTransactions(@PathVariable Integer accountNumber) {
+        return transactionService.findAllTransactionsByAccountId(accountNumber);
     }
 
     @GetMapping("/{id}")
@@ -38,16 +37,13 @@ public class TransactionController {
 
     @PostMapping
     public Transaction createTransaction(@RequestBody Transaction transaction) {
-        return transactionService.createTransaction(transaction);
+        return transactionService.addTransaction(transaction);
     }
 
-    @PutMapping("/{id}")
-    public Transaction updateTransaction(@PathVariable int id, @RequestBody Transaction transaction) {
-        return transactionService.updateTransaction(id, transaction);
+    @PutMapping("")
+    public Transaction updateTransaction(@RequestBody Transaction transaction) {
+        return transactionService.updateTransaction(transaction);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTransaction(@PathVariable int id) {
-        transactionService.deleteTransaction(id);
-    }
+
 }

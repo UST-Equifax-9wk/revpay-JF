@@ -9,15 +9,15 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(indexes = {@Index(columnList = "user_id", unique = true)})
+@Table(name = "users", indexes = {@Index(columnList = "userId", unique = true)})
 public class User {
     @Id
-    @Column(name = "user_id")
+    @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_id;
+    private Integer userId;
 
-    @Column(name = "username", nullable = false, length = 60)
-    private String username;
+    @Column(name = "userName", nullable = false, length = 60)
+    private String userName;
 
     @Column(name = "email", nullable = true)
     private String email;
@@ -28,26 +28,26 @@ public class User {
     @Column(name = "passwordHash", nullable = false, length = 60)
     private String passwordHash;
 
-    @Column(name = "phone_number", nullable = true, length = 10)
-    private String phone_number;
+    @Column(name = "phoneNumber", nullable = true, length = 10)
+    private String phoneNumber;
 
     //given both email and phone number are optional, we need to make sure that the user has at least one of them
     //if they have neither, then they cannot be contacted
     //if they have both, then they can be contacted by either
     public User(String username, String email, String password,  String phone_number) {
-        this.username = username;
+        this.userName = username;
         this.email = email;
         this.password = password;
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
-  
+
     //if they have only one, then they can only be contacted by that one
     public User(String username, String contact, String password) {
-        this.username = username;
+        this.userName = username;
         if(contact.contains("@"))
             this.email = contact;
         else
-            this.phone_number = contact;
+            this.phoneNumber = contact;
         this.password = password;
     }
     
@@ -57,20 +57,20 @@ public class User {
     }
     
     // Setters and Getters
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer user_id) {
+        this.userId = user_id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String username) {
+        this.userName = username;
     }
 
     public String getEmail() {
@@ -97,12 +97,12 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phone_number) {
+        this.phoneNumber = phone_number;
     }
 }
 

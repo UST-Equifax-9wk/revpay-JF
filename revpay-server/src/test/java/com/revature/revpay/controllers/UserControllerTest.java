@@ -29,10 +29,10 @@ public class UserControllerTest {
     public void setUp() {
         // Mock UserService methods
         User user = new User();
-        user.setUser_id(1);
-        user.setUsername("testuser");
+        user.setUserId(1);
+        user.setUserName("testuser");
         user.setEmail("testuser@example.com");
-        user.setPhone_number("1234567890");
+        user.setPhoneNumber("1234567890");
 
         when(userService.findUserById(1)).thenReturn(user);
         when(userService.findUserByUsername("testuser")).thenReturn(user);
@@ -89,9 +89,9 @@ public class UserControllerTest {
     @Test
     public void testAddUser() throws Exception {
         User user = new User();
-        user.setUsername("testuser");
+        user.setUserName("testuser");
         user.setEmail("testuser@example.com");
-        user.setPhone_number("1234567890");
+        user.setPhoneNumber("1234567890");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -106,10 +106,10 @@ public class UserControllerTest {
     @Test
     public void testUpdateUser() throws Exception {
         User user = new User();
-        user.setUser_id(1);
-        user.setUsername("testuser");
+        user.setUserId(1);
+        user.setUserName("testuser");
         user.setEmail("testuser@example.com");
-        user.setPhone_number("1234567890");
+        user.setPhoneNumber("1234567890");
 
         mockMvc.perform(MockMvcRequestBuilders.put("/users")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -124,10 +124,10 @@ public class UserControllerTest {
     @Test
     public void testDeleteUser() throws Exception {
         User user = new User();
-        user.setUser_id(1);
-        user.setUsername("testuser");
+        user.setUserId(1);
+        user.setUserName("testuser");
         user.setEmail("testuser@example.com");
-        user.setPhone_number("1234567890");
+        user.setPhoneNumber("1234567890");
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/users")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -15,39 +16,39 @@ import jakarta.persistence.Table;
 public class Transaction {
 
     @Id
-    @Column(name = "transaction_id")
+    @Column(name = "transactionId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer transaction_id;
+    private Integer transactionId;
 
     @ManyToOne
-    @Column(name = "sender_account", nullable = false)
+    @JoinColumn(name = "senderAccount", nullable = false)
     @JsonBackReference
-    private Account sender_account;
+    private Account senderAccount;
     
     @ManyToOne
-    @Column(name = "receiver_account", nullable = false)
+    @JoinColumn(name = "receiverAccount", nullable = false)
     @JsonBackReference
-    private Account receiver_account;
+    private Account receiverAccount;
 
     @Column(name = "amount", nullable = false)
     private Double amount;
 
-    @Column(name = "transaction_type", nullable = false)
-    private String transaction_type;
+    @Column(name = "transactionType", nullable = false)
+    private String transactionType;
 
-    @Column(name = "transaction_status", nullable = false)
-    private String transaction_status;
+    @Column(name = "transactionStatus", nullable = false)
+    private String transactionStatus;
 
-    @Column(name = "transaction_date", nullable = false)
-    private String transaction_date;
+    @Column(name = "transactionDate", nullable = false)
+    private String transactionDate;
 
     public Transaction(Integer transaction_id, Account sender_account, Account receiver_account, Double amount, String transaction_type, String transaction_status, String transaction_date) {
-        this.transaction_id = transaction_id;
-        this.sender_account = sender_account;
-        this.receiver_account = receiver_account;
+        this.transactionId = transaction_id;
+        this.senderAccount = sender_account;
+        this.receiverAccount = receiver_account;
         this.amount = amount;
-        this.transaction_type = transaction_type;
-        this.transaction_status = transaction_status;
-        this.transaction_date = transaction_date;
+        this.transactionType = transaction_type;
+        this.transactionStatus = transaction_status;
+        this.transactionDate = transaction_date;
     }
 }

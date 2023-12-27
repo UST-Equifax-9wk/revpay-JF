@@ -25,22 +25,22 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public Account getAccountById(@PathVariable int id) {
-        return accountService.getAccountById(id);
+        return accountService.findAccountById(id);
     }
 
     @PostMapping
     public Account createAccount(@RequestBody Account account) {
-        return accountService.createAccount(account);
+        return accountService.addAccount(account);
     }
 
     @PutMapping("/{id}")
     public Account updateAccount(@PathVariable int id, @RequestBody Account account) {
-        return accountService.updateAccount(id, account);
+        return accountService.updateAccount(account);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAccount(@PathVariable int id) {
-        accountService.deleteAccount(id);
+    public Boolean deleteAccount(@PathVariable int id) {
+        return accountService.deleteAccount(id);
     }
 
     // Add more controller methods here

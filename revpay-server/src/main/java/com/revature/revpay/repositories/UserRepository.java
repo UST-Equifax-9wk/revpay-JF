@@ -9,10 +9,10 @@ import com.revature.revpay.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByUsername(String username);
+    Optional<User> findByUserName(String username);
     Optional<User> findByEmail(String email);
-    Optional<User> findByPhone_number(String phone_number);
-    Optional<User> findByUser_id(Integer user_id);
+    Optional<User> findByPhoneNumber(String phone_number);
+    Optional<User> findByUserId(Integer user_id);
     
 
 }

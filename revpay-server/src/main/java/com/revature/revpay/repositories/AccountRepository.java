@@ -9,9 +9,10 @@ import com.revature.revpay.entities.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
-    Optional<Account> findByAccount_id(Integer account_id);
-    Optional<Account> findByAccount_balance(Double account_balance);
-    Optional<Account> findByUser_id(Integer user_id);
-    Optional<Account> findByAccount_type(Boolean account_type);
+    Optional<Account> findByAccountId(Integer account_id);
+    Optional<Account> findByBalance(Double account_balance);
+    Optional<Account> findByUser_UserId(Integer user_id);
+    Optional<Account> findByAccountType(Boolean account_type);
+    Boolean deleteByAccountId(Integer account_id);
 
 }

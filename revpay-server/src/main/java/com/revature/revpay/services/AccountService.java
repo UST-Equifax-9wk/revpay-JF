@@ -20,15 +20,15 @@ public class AccountService {
     }
 
     public Account findAccountById(Integer account_id) {
-        return accountRepository.findByAccount_id(account_id).orElseThrow();
+        return accountRepository.findByAccountId(account_id).orElseThrow();
     }
 
     public Account findAccountByUser_id(Integer user_id) {
-        return accountRepository.findByUser_id(user_id).orElseThrow();
+        return accountRepository.findByUser_UserId(user_id).orElseThrow();
     }
 
     public Account findAccountByAccount_type(Boolean account_type) {
-        return accountRepository.findByAccount_type(account_type).orElseThrow();
+        return accountRepository.findByAccountType(account_type).orElseThrow();
     }
 
     public Account addAccount(Account account) {
@@ -39,8 +39,8 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public void deleteAccount(Account account) {
-        accountRepository.delete(account);
+    public Boolean deleteAccount(int id) {
+        return accountRepository.deleteByAccountId(id);
     }
 
 

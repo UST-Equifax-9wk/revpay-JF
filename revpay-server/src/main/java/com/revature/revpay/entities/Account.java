@@ -16,31 +16,55 @@ import jakarta.persistence.Table;
 public class Account {
 
     @Id
-    @Column(name = "account_id")
+    @Column(name = "accountId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer account_id;
+    private Integer accountId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     @JsonBackReference
     private User user;
 
-    @Column(name = "account_Number", nullable = false, length = 60)
-    private String account_Number;
+    @Column(name = "accountNumber", nullable = false, length = 60)
+    private String accountNumber;
 
     @Column(name = "balance", nullable = false, length = 60)
-    private String balance;
+    private Double balance;
 
-    @Column(name = "account_type", nullable = false)
-    private Boolean account_type; // one for business, zero for personal
+    @Column(name = "accountType", nullable = false)
+    private Boolean accountType; // one for business, zero for personal
 
-    public Account(Integer account_id, User user, String account_Number, String balance, Boolean account_type) {
-        this.account_id = account_id;
+    public Account(Integer account_id, User user, String account_Number, Double balance, Boolean account_type) {
+        this.accountId = account_id;
         this.user = user;
-        this.account_Number = account_Number;
+        this.accountNumber = account_Number;
         this.balance = balance;
-        this.account_type = account_type;
+        this.accountType = account_type;
 
+    }
+
+    public Account() {
+    }
+
+    public void setId(int i) {
+    }
+
+    public void setAccountNumber(String string) {
+    }
+
+    public void setAccountHolderName(String string) {
+    }
+
+    public void setBalance(double d) {
+    }
+
+    public void setAccountId(int accountId) {
+    }
+
+    public void setUserId(int userId) {
+    }
+
+    public void setAccountType(boolean accountType) {
     }
 
     

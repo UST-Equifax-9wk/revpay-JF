@@ -60,8 +60,8 @@ public class CardController {
     }
 
     @DeleteMapping("/{card_id}")
-    public void deleteCard(@PathVariable("card_id") Integer card_id) {
-        cardService.deleteCard(card_id);
+    public Boolean deleteCard(@PathVariable("card_id") Integer card_id) {
+        return cardService.deleteCard(card_id);
     }
 
 

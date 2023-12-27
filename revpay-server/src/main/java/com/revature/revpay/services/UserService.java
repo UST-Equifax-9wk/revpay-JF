@@ -20,11 +20,11 @@ public class UserService {
     }
 
     public User findUserById(Integer user_id) {
-        return userRepository.findByUser_id(user_id).orElseThrow();
+        return userRepository.findByUserId(user_id).orElseThrow();
     }
 
     public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow();
+        return userRepository.findByUserName(username).orElseThrow();
     }
 
     public User findUserByEmail(String email) {
@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public User findUserByPhone_number(String phone_number) {
-        return userRepository.findByPhone_number(phone_number).orElseThrow();
+        return userRepository.findByPhoneNumber(phone_number).orElseThrow();
     }
 
     public User addUser(User user) {
