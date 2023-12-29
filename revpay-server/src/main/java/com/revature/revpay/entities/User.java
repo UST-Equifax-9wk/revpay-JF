@@ -16,17 +16,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Column(name = "userName", nullable = false, length = 60)
+    @Column(name = "userName", nullable = false, length = 60, unique = true)
     private String userName;
 
     @Column(name = "email", nullable = true)
     private String email;
-
-    @Column(name = "password", nullable = false, length = 60)
-    private String password;
-
-    @Column(name = "passwordHash", nullable = false, length = 60)
-    private String passwordHash;
 
     @Column(name = "phoneNumber", nullable = true, length = 10)
     private String phoneNumber;
@@ -34,21 +28,19 @@ public class User {
     //given both email and phone number are optional, we need to make sure that the user has at least one of them
     //if they have neither, then they cannot be contacted
     //if they have both, then they can be contacted by either
-    public User(String username, String email, String password,  String phone_number) {
+    public User(String username, String email, String phone_number) {
         this.userName = username;
         this.email = email;
-        this.password = password;
         this.phoneNumber = phone_number;
     }
 
     //if they have only one, then they can only be contacted by that one
-    public User(String username, String contact, String password) {
+    public User(String username, String contact) {
         this.userName = username;
         if(contact.contains("@"))
             this.email = contact;
         else
             this.phoneNumber = contact;
-        this.password = password;
     }
     
     //empty constructor
@@ -79,22 +71,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
 
     public String getPhoneNumber() {

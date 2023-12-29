@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.revpay.entities.User;
+import com.revature.revpay.exceptions.NoResultsException;
 import com.revature.revpay.repositories.UserRepository;
 
 @Service
@@ -20,10 +21,10 @@ public class UserService {
     }
 
     public User findUserById(Integer user_id) {
-        return userRepository.findByUserId(user_id).orElseThrow();
+        return userRepository.findByUserId(user_id).get();
     }
 
-    public User findUserByUsername(String username) {
+    public User findUserByUsername(String username) throws NoResultsException{
         return userRepository.findByUserName(username).orElseThrow();
     }
 
@@ -35,6 +36,10 @@ public class UserService {
         return userRepository.findByPhoneNumber(phone_number).orElseThrow();
     }
 
+    public Boolean CheckByUserName(String username) {
+        return userRepository.existsByUserName(username);
+    }
+    
     public User addUser(User user) {
         return userRepository.save(user);
     }
@@ -46,5 +51,6 @@ public class UserService {
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
+
 
 }

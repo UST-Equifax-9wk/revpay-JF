@@ -21,7 +21,7 @@ import com.revature.revpay.services.LoanService;
  * This class represents the controller for managing loans.
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 public class LoanController {
 
     private final LoanService loanService;
@@ -41,7 +41,7 @@ public class LoanController {
      *
      * @return a ResponseEntity containing a list of all loans and the HTTP status code
      */
-    @GetMapping("/account/{id}")
+    @GetMapping("/loans/{id}")
     public ResponseEntity<List<Loan>> getAllLoansByAccountId(@PathVariable("id") int id) {
         List<Loan> loans = loanService.findAllLoansByAccount_id(id);
         return new ResponseEntity<>(loans, HttpStatus.OK);
@@ -53,7 +53,7 @@ public class LoanController {
      * @param id the ID of the loan to retrieve
      * @return a ResponseEntity containing the Loan object and the HTTP status code
      */
-    @GetMapping("/{id}")
+    @GetMapping("/loan/{id}")
     public ResponseEntity<Loan> getLoanById(@PathVariable("id") int id) {
         Loan loan = loanService.findLoanById(id);
         if (loan != null) {
@@ -69,7 +69,7 @@ public class LoanController {
      * @param loan the Loan object to create
      * @return a ResponseEntity containing the created Loan object and the HTTP status code
      */
-    @PostMapping
+    @PostMapping("/loans")
     public ResponseEntity<Loan> createLoan(@RequestBody Loan loan) {
         Loan createdLoan = loanService.addLoan(loan);
         return new ResponseEntity<>(createdLoan, HttpStatus.CREATED);
@@ -82,7 +82,7 @@ public class LoanController {
      * @param loan the updated Loan object
      * @return a ResponseEntity containing the updated Loan object and the HTTP status code
      */
-    @PutMapping("/{id}")
+    @PutMapping("/loans")
     public ResponseEntity<Loan> updateLoan(@RequestBody Loan loan) {
         Loan updatedLoan = loanService.updateLoan(loan);
         if (updatedLoan != null) {
@@ -98,7 +98,7 @@ public class LoanController {
      * @param id the ID of the loan to delete
      * @return a ResponseEntity with the HTTP status code
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/loans/{id}")
     public ResponseEntity<Boolean> deleteLoan(@PathVariable("id") int id) {
         boolean deleted = loanService.deleteLoan(id);
         if (deleted) {
