@@ -22,11 +22,11 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    @JsonBackReference
-    private User user;
+    @JsonBackReference(value = "user")
+    private User userId;
 
-    @Column(name = "accountNumber", nullable = false, length = 60)
-    private String accountNumber;
+    @Column(name = "accountName", nullable = false, length = 60)
+    private String accountName;
 
     @Column(name = "balance", nullable = false, length = 60)
     private Double balance;
@@ -34,39 +34,55 @@ public class Account {
     @Column(name = "accountType", nullable = false)
     private Boolean accountType; // one for business, zero for personal
 
-    public Account(Integer account_id, User user, String account_Number, Double balance, Boolean account_type) {
+    public Account(Integer account_id, User user, String account_Name, Double balance, Boolean account_type) {
         this.accountId = account_id;
-        this.user = user;
-        this.accountNumber = account_Number;
+        this.userId = user;
         this.balance = balance;
         this.accountType = account_type;
-
+        this.accountName = account_Name;
     }
 
     public Account() {
     }
 
-    public void setId(int i) {
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccountNumber(String string) {
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
-    public void setAccountHolderName(String string) {
+    public User getUserId() {
+        return userId;
     }
 
-    public void setBalance(double d) {
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
-    public void setAccountId(int accountId) {
+    public String getAccountName() {
+        return accountName;
     }
 
-    public void setUserId(int userId) {
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
-    public void setAccountType(boolean accountType) {
+    public Double getBalance() {
+        return balance;
     }
 
-    
-    
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public Boolean getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Boolean accountType) {
+        this.accountType = accountType;
+    }
 }
+

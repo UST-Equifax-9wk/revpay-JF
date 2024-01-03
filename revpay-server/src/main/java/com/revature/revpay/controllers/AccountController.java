@@ -1,6 +1,8 @@
 package com.revature.revpay.controllers;
 
 
+import java.util.Set;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +30,14 @@ public class AccountController {
         return accountService.findAccountById(id);
     }
 
-    @PostMapping("/account")
-    public Account createAccount(@RequestBody Account account) {
-        return accountService.addAccount(account);
+    @GetMapping("/account/user/{id}")
+    public Set<Account> getAccountsByUserId(@PathVariable Integer id) {
+        return accountService.findAccountsByUserId(id);
+    }
+
+    @PostMapping("/account/{id}")
+    public Account createAccount(@PathVariable Integer id, @RequestBody Account account) {
+        return accountService.addAccount(id, account);
     }
 
     @PutMapping("/account/{id}")

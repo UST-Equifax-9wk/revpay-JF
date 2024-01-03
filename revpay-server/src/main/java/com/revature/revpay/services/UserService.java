@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public User findUserByUsername(String username) throws NoResultsException{
-        return userRepository.findByUserName(username).orElseThrow();
+        return userRepository.findByUsername(username).orElseThrow();
     }
 
     public User findUserByEmail(String email) {
@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public Boolean CheckByUserName(String username) {
-        return userRepository.existsByUserName(username);
+        return userRepository.existsByUsername(username);
     }
     
     public User addUser(User user) {

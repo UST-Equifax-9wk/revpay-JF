@@ -11,13 +11,13 @@
     </div>
     <div>
         <label for="phone">Phone Number:</label>
-        <input type="text" id="phone" [(ngModel)]="phone" name = "phone">
+        <input type="text" id="phone" [(ngModel)]="phoneNumber" name = "phone">
     </div>
     <div>
         <label for="password">Password:</label>
         <input type="password" id="password" [(ngModel)]="password" name = "password">
     </div>
-    <button (click)="submitRegistration()" *ngIf="username != '' && (email != '' || phone != '') && password != ''" type="submit">Register</button>
+    <button  (click)="submitRegistration()" *ngIf="username != '' && (email != '' || phoneNumber != '') && password != ''" type="submit" >Register</button>
 </form>
 
 

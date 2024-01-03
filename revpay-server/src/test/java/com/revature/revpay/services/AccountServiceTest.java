@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,10 +50,10 @@ public class AccountServiceTest {
         Account account = new Account();
         account.setAccountId(1);
         account.setUserId(userId);
-        when(accountRepository.findByUser_UserId(userId)).thenReturn(Optional.of(account));
+        when(accountRepository.findAllAccountsByUser_UserId(userId)).thenReturn(Set.of(account));
 
         // Act
-        Account result = accountService.findAccountByUser_id(userId);
+        Set<Account> result = accountService.findAccountsByUserId(userId);
 
         // Assert
         assertEquals(account, result);

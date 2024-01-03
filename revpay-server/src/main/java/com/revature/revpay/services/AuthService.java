@@ -28,13 +28,13 @@ public class AuthService {
     @Transactional
     public User registerUser(NewUserDto nUser) throws UsernameUnavailableException {
         // check if username is available
-        if (!this.userService.CheckByUserName(nUser.getUser().getUserName())){
+        if (!this.userService.CheckByUserName(nUser.getUser().getUsername())){
             // setting the password to the hashed password
             nUser.getAuth().setPassword(this.hash(nUser.getAuth().getPassword()));
             // saves the user with the hashed password to the auth repo
             this.authRepository.save(nUser.getAuth());
             // returns the user when it saved to the user repo
-            return this.userService.updateUser(nUser.getUser());
+            return this.userService.addUser(nUser.getUser());
         }
         throw new UsernameUnavailableException("Username is unavailable");
         }

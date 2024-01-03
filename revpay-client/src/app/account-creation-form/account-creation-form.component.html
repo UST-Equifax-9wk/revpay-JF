@@ -1,0 +1,29 @@
+<form>
+    <label for="accountName">Account Name:</label>
+    <input type="text" id="accountName" [(ngModel)]="accountName" name="accountName" required>
+
+    <br>
+
+    <label for="businessAccount">Business Account:</label>
+    <input type="checkbox" id="businessAccount" [(ngModel)]="accountType" name="businessAccount">
+
+    <br>
+
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" name="cardNumber" required>
+
+    <br>
+
+    <label for="expiryDate">Expiry Date:</label>
+    <input type="text" id="expiryDate" name="expiryDate" required>
+
+    <br>
+
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" required>
+
+    <br>
+
+    <button type="submit" (click) = "submitAccountCreation()" *ngIf="accountName != ''">Create Account</button>
+</form>
+

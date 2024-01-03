@@ -31,7 +31,7 @@ public class UserControllerTest {
         // Mock UserService methods
         User user = new User();
         user.setUserId(1);
-        user.setUserName("john_doe");
+        user.setUsername("john_doe");
         user.setEmail("john.doe@example.com");
         user.setPhoneNumber("1234567890");
 
@@ -90,7 +90,7 @@ public class UserControllerTest {
     @Test
     public void testAddUser() throws Exception {
         User user = new User();
-        user.setUserName("john_doe");
+        user.setUsername("john_doe");
         user.setEmail("john.doe@example.com");
         user.setPhoneNumber("1234567890");
 
@@ -108,7 +108,7 @@ public class UserControllerTest {
     public void testUpdateUser() throws Exception {
         User user = new User();
         user.setUserId(1);
-        user.setUserName("john_doe");
+        user.setUsername("john_doe");
         user.setEmail("john.doe@example.com");
         user.setPhoneNumber("1234567890");
 

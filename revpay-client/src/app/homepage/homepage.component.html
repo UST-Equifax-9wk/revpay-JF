@@ -1,0 +1,14 @@
+<p>homepage works!</p>
+<div class="container">
+    <h1>Welcome to the Homepage</h1>
+    <div class="buttons">
+        <button routerLink="../create-account">Create Account</button>
+    </div>
+    <div class="account-list">
+        <ul>
+            <li *ngFor="let account of accounts" [routerLink]="['../account/', account.accountId]">
+                {{ account.accountName }} - {{ account.balance | currency:'USD' }} - {{ account.accountType ? 'Business Account' : 'Personal Account' }}
+            </li>
+        </ul>
+    </div>
+</div>

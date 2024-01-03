@@ -40,7 +40,8 @@ public class AuthController {
                 // if the user is logged in, create a cookie with the username
                 Cookie cookie = new Cookie("username", auth.getUsername());
                 // set the cookie to expire in 7 days
-                cookie.setMaxAge(60*60*24*7);
+                //cookie.setMaxAge(60*60*24*7);
+                cookie.setMaxAge(60*1);
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 // return the user

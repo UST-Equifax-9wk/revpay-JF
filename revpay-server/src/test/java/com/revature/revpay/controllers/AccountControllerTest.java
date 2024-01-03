@@ -29,7 +29,7 @@ public class AccountControllerTest {
         // Mock AccountService methods
         Account account = new Account();
         account.setId(1);
-        account.setAccountNumber("1234567890");
+        account.setAccountName("1234567890");
         account.setAccountHolderName("John Doe");
         account.setBalance(1000.0);
 
@@ -53,7 +53,7 @@ public class AccountControllerTest {
     @Test
     public void testCreateAccount() throws Exception {
         Account account = new Account();
-        account.setAccountNumber("1234567890");
+        account.setAccountName("1234567890");
         account.setAccountHolderName("John Doe");
         account.setBalance(1000.0);
 
@@ -71,7 +71,7 @@ public class AccountControllerTest {
     public void testUpdateAccount() throws Exception {
         Account account = new Account();
         account.setId(1);
-        account.setAccountNumber("1234567890");
+        account.setAccountName("1234567890");
         account.setAccountHolderName("John Doe");
         account.setBalance(1000.0);
 
