@@ -1,7 +1,11 @@
 package com.revature.revpay.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,12 +39,27 @@ public class Account {
     @Column(name = "accountType", nullable = false)
     private Boolean accountType; // one for business, zero for personal
 
-    public Account(Integer account_id, User user, String account_Name, Double balance, Boolean account_type) {
+    @OneToMany(mappedBy = "senderAccount", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "sending_account")
+    private Set<Transaction> transactionsOut;
+
+    @OneToMany(mappedBy = "receiverAccount", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "receiving_account")
+    private Set<Transaction> transactionsIn;
+
+    @OneToMany(mappedBy = "accountId", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "card_account")
+    private Set<Card> cards;
+
+    public Account(Integer account_id, User user, String account_Name, Double balance, Boolean account_type, Set<Transaction> transactionsOut, Set<Transaction> transactionsIn, Set<Card> cards) {
         this.accountId = account_id;
         this.userId = user;
         this.balance = balance;
         this.accountType = account_type;
         this.accountName = account_Name;
+        this.transactionsOut = transactionsOut;
+        this.transactionsIn = transactionsIn;
+        this.cards = cards;
     }
 
     public Account() {
@@ -83,6 +103,12 @@ public class Account {
 
     public void setAccountType(Boolean accountType) {
         this.accountType = accountType;
+    }
+
+    @Override
+    public String toString() {
+        return "Account [accountId=" + accountId + ", userId=" + userId + ", accountName=" + accountName + ", balance="
+                + balance + ", accountType=" + accountType + "]";
     }
 }
 

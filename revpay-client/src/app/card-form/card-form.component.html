@@ -1,0 +1,20 @@
+<form>
+    <div>
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" [(ngModel)]="cardNum" name="cardNumber" required>
+    </div>
+    <div>
+        <label for="cardHolder">Card Holder:</label>
+        <input type="text" id="cardHolder" [(ngModel)]="cardHolder" name="cardHolder" required>
+    </div>
+    <div>
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="date" id="expiryDate" [(ngModel)]="cardExp" name="exp" required>
+    </div>
+    <div>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" [(ngModel)]="cardCvv" name="cvv" required>
+    </div>
+    <button (click)="submitCardCreation()" name="submit">Submit</button>
+</form>
+

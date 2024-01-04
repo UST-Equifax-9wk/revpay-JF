@@ -1,0 +1,6 @@
+<form>
+    <label for="amount">Amount:</label>
+    <input type="text" appCurrencyFormat [(ngModel)]="balance" name = "deposit" required>
+
+    <button (click)="deposit()" type="submit">Deposit</button>
+</form>

@@ -41,8 +41,8 @@ public class AccountController {
     }
 
     @PutMapping("/account/{id}")
-    public Account updateAccount(@PathVariable int id, @RequestBody Account account) {
-        return accountService.updateAccount(account);
+    public Account updateAccount(@PathVariable Integer id, @RequestBody Account account) {
+        return accountService.updateAccount(id, account);
     }
 
     @DeleteMapping("/account/{id}")

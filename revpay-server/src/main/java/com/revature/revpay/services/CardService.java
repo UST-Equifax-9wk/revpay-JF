@@ -1,5 +1,7 @@
 package com.revature.revpay.services;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -16,11 +18,14 @@ import com.revature.revpay.repositories.CardRepository;
 public class CardService {
     private final CardRepository cardRepository;
     private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
     @Autowired
-    public CardService(CardRepository cardRepository, AccountRepository accountRepository) {
+    public CardService(CardRepository cardRepository, AccountRepository accountRepository, AccountService accountService) {
         this.cardRepository = cardRepository;
+        this.accountService = accountService;
         this.accountRepository = accountRepository;
+
     }
 
 
@@ -32,14 +37,6 @@ public class CardService {
         return cardRepository.findByCardNum(card_number).orElseThrow();
     }
 
-    public Card findByFirst_Name(String firstName) {
-        return cardRepository.findByFirstName(firstName).orElseThrow();
-    }
-
-    public Card findCardByLast_Name(String lastName) {
-        return cardRepository.findByFirstName(lastName).orElseThrow();
-    }
-
     public Card findCardByCard_cvv(String card_cvv) {
         return cardRepository.findByCardCvv(card_cvv).orElseThrow();
     }
@@ -48,12 +45,14 @@ public class CardService {
         return cardRepository.findByCardExp(card_exp).orElseThrow();
     }
 
-    public Card findCardByAccount_id(Integer account_id) {
+    public Set<Card> findAllCardsByAccount_id(Integer account_id) {
         Account account = accountRepository.findByAccountId(account_id).orElseThrow();
-        return cardRepository.findByAccountId(account).orElseThrow();
+        return cardRepository.findAllCardsByAccountId(account);
     }
 
-    public Card addCard(Card card) {
+    public Card addCard(Integer id, Card card) {
+        Account account = accountRepository.findByAccountId(id).get();
+        card.setAccountId(account);
         return cardRepository.save(card);
     }
 

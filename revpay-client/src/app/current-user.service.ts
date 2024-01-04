@@ -48,6 +48,26 @@ export class CurrentUserService {
         })
       });
     }
+
+    createCard(card: Card, account_id: number): Observable<HttpResponse<Object>> {
+      return this.httpClient.post(this.baseUrl + '/card/' + account_id, card, {
+        observe: 'response',
+        withCredentials: true,
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+    }
+
+    deposit(account_id: number, account: Account): Observable<HttpResponse<Object>> {
+      return this.httpClient.put(this.baseUrl + '/account/' + account_id, account, {
+        observe: 'response',
+        withCredentials: true,
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+    }
   }
 
 export interface User {
@@ -71,11 +91,10 @@ export interface CurrentAccount{
 }
 
 export interface Card {
-  cardNumber: string;
-  expirationDate: string;
-  securityCode: string;
-  id?: number;
-  accountId: number;
+  cardHolder: string;
+  cardNum: string;
+  cardExp: string;
+  cardCvv: string;
 }
 
   

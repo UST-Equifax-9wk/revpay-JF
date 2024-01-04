@@ -1,5 +1,7 @@
 package com.revature.revpay.controllers;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -7,10 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.revpay.entities.Card;
 import com.revature.revpay.services.CardService;
+
 
 
 @RestController
@@ -20,7 +24,6 @@ public class CardController {
 
     @Autowired
     public CardController(CardService cardService) {
-        super();
         this.cardService = cardService;
     }
 
@@ -29,29 +32,15 @@ public class CardController {
         return cardService.findCardById(card_id);
     }
 
-    @GetMapping("/card/{card_number}")
-    public Card findCardByCard_number(@PathVariable("card_number") String card_number) {
-        return cardService.findCardByCard_number(card_number);
+    @GetMapping("/cards/{account_id}")
+    public Set<Card> findCardByAccount_id(@PathVariable("account_id") Integer account_id) {
+        return cardService.findAllCardsByAccount_id(account_id);
     }
 
-    @GetMapping("/card/{card_cvv}")
-    public Card findCardByCard_cvv(@PathVariable("card_cvv") String card_cvv) {
-        return cardService.findCardByCard_cvv(card_cvv);
-    }
 
-    @GetMapping("/card/{card_exp}")
-    public Card findCardByCard_exp(@PathVariable("card_exp") String card_exp) {
-        return cardService.findCardByCard_exp(card_exp);
-    }
-
-    @GetMapping("/card/{account_id}")
-    public Card findCardByAccount_id(@PathVariable("account_id") Integer account_id) {
-        return cardService.findCardByAccount_id(account_id);
-    }
-
-    @PostMapping("/card")
-    public Card addCard(Card card) {
-        return cardService.addCard(card);
+    @PostMapping("/card/{account_id}")
+    public Card addCard(@PathVariable Integer account_id, @RequestBody Card card) {
+        return cardService.addCard(account_id, card);
     }
 
     @PutMapping("/card")

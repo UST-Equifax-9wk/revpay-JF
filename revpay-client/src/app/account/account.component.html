@@ -1,14 +1,24 @@
 <div>
-    <h1>Balance: $1000</h1>
+    <h1>Balance: {{balance | currency: 'USD' }}</h1>
     <h2>Card List:</h2>
-    <ul>
-        <li>Card 1</li>
-        <li>Card 2</li>
-        <li>Card 3</li>
-    </ul>
-    <button>Add Card</button>
-    <button>Deposit Money</button>
+    <div class="card-list">
+        <ul>
+            <li *ngFor="let card of cards; let i = index"
+            (mouseenter)="hoveredIndex = i"
+            (mouseleave)="hoveredIndex = -1"
+            [class.hovered]="hoveredIndex === i"
+            [class.primary]="primaryCardIndex === i">
+            
+            {{ card.cardHolder }} - {{ 'xxxx-xxxx-xxxx-' + card.cardNum.slice(-4) }}
+
+            <button *ngIf="hoveredIndex === i" (click)="makePrimary(i)">Make Primary</button>
+        </li>
+        </ul>
+    </div>
+    <button routerLink='create-card' >Add Card</button>
+    <button routerLink="deposit">Deposit Money</button>
     <button>Send Money</button>
     <button>Request Money</button>
     <button>Transaction History</button>
+    <router-outlet></router-outlet>
 </div>

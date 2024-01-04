@@ -21,13 +21,13 @@ public class Transaction {
     private Integer transactionId;
 
     @ManyToOne
-    @JoinColumn(name = "senderAccount", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "account_id_from", nullable = false)
+    @JsonBackReference("sending_account")
     private Account senderAccount;
     
     @ManyToOne
-    @JoinColumn(name = "receiverAccount", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "account_id_to", nullable = false)
+    @JsonBackReference("receiving_account")
     private Account receiverAccount;
 
     @Column(name = "amount", nullable = false)

@@ -8,75 +8,105 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "card", indexes = {@Index(columnList = "cardId", unique = true)})
+@Table(name = "card")
 public class Card {
     @Id
     @Column(name = "cardId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cardId;
 
-    @Column(name = "firstName", nullable = false, length = 60)
-    private String firstName;
-
-    @Column(name = "lastName", nullable = false, length = 60)
-    private String lastName;
+    @Column(name = "cardHolder", nullable = false, length = 60)
+    private String cardHolder;
 
     @Column(name = "cardNum", nullable = false, length = 16)
     private String cardNum;
 
-    @Column(name = "cardExp", nullable = false, length = 4)
+    @Column(name = "cardExp", nullable = false, length = 10)
     private String cardExp;
 
     @Column(name = "cardCvv", nullable = false, length = 3)
     private String cardCvv;
 
     @ManyToOne
-    @JoinColumn(name = "accountId", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "account_id", nullable = false)
+    @JsonBackReference("card_account")
     private Account accountId;
 
-    public Card( Integer card_id, String first_name, String last_name, String card_num, String card_exp, String card_cvv, Account account_id) {
-        this.cardId = card_id;
-        this.firstName = first_name;
-        this.lastName = last_name;
+    public Card(String cardholder, String card_num, String card_exp, String card_cvv, Account account_id) {
         this.cardNum = card_num;
         this.cardExp = card_exp;
+        this.cardHolder = cardholder;
         this.cardCvv = card_cvv;
         this.accountId = account_id;
     }
 
     public Card() {
+        super();
     }
 
-    public void setCardId(int i) {
-        this.cardId = i;
-    }
 
-    public void setCardNumber(String string) {
-        this.cardNum = string;
-    }
-
-    public void setCardHolderName(String string) {
-        this.firstName = string;
-    }
-
-    public void setExpirationDate(String string) {
-        this.cardExp = string;
-    }
-
-    public void setCvv(String string) {
-        this.cardCvv = string;
-    }
-
-    public Integer get_id() {
+    // Getters
+    public Integer getCardId() {
         return cardId;
     }
+
+    public String getCardHolder() {
+        return cardHolder;
+    }
+
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public String getCardExp() {
+        return cardExp;
+    }
+
+    public String getCardCvv() {
+        return cardCvv;
+    }
+
+    public Account getAccountId() {
+        return accountId;
+    }
+
+    // Setters
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
+    }
+
+    public void setCardHolder(String cardHolder) {
+        this.cardHolder = cardHolder;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
+
+    public void setCardExp(String cardExp) {
+        this.cardExp = cardExp;
+    }
+
+    public void setCardCvv(String cardCvv) {
+        this.cardCvv = cardCvv;
+    }
+
+    public void setAccountId(Account accountId) {
+        this.accountId = accountId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Card [cardId=" + cardId + ", cardHolder=" + cardHolder + ", cardNum=" + cardNum + ", cardExp=" + cardExp
+                + ", cardCvv=" + cardCvv + ", accountId=" + accountId + "]";
+    }
+
 
 
 }

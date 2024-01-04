@@ -42,7 +42,8 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Account updateAccount(Account account) {
+    public Account updateAccount(Integer id, Account account) {
+        account.setAccountId(id);
         return accountRepository.save(account);
     }
 
