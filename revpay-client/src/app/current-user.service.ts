@@ -68,6 +68,47 @@ export class CurrentUserService {
         })
       });
     }
+
+    withdraw(account_id: number, account: Account): Observable<HttpResponse<Object>> {
+      return this.httpClient.put(this.baseUrl + '/account/' + account_id, account, {
+        observe: 'response',
+        withCredentials: true,
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+    }
+
+    findRecipient(recipient: string): Observable<HttpResponse<Object>> {
+      if (recipient.includes('@')) {
+        return this.httpClient.get(this.baseUrl + '/user/email/' + recipient, {
+          observe: 'response',
+          withCredentials: true,
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        });
+      } else {
+        return this.httpClient.get(this.baseUrl + '/user/phone/' + recipient, {
+          observe: 'response',
+          withCredentials: true,
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        });
+      }
+      
+    }
+
+    send(transactionDto: TransactionDto): Observable<HttpResponse<Object>> {
+      return this.httpClient.post(this.baseUrl + '/transactions', transactionDto, {
+        observe: 'response',
+        withCredentials: true,
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      });
+    }
   }
 
 export interface User {
@@ -95,6 +136,20 @@ export interface Card {
   cardNum: string;
   cardExp: string;
   cardCvv: string;
+}
+
+export interface TransactionDto {
+  amount: number;
+  senderAccountId: number;
+  receiverAccountId: number;
+}
+
+export interface Transaction {
+  transactionId: number;
+  amount: number;
+  senderAccountId: number;
+  receiverAccountId: number;
+  transactionDate: string;
 }
 
   

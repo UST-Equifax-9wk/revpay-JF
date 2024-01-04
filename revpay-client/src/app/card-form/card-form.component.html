@@ -1,7 +1,10 @@
-<form>
+<form #cardForm="ngForm">
     <div>
         <label for="cardNumber">Card Number:</label>
-        <input type="text" id="cardNumber" [(ngModel)]="cardNum" name="cardNumber" required>
+        <input type="text" id="cardNumber" [(ngModel)]="cardNum" name="cardNumber" #cardNumber="ngModel" required pattern="\d{16}">
+        <div *ngIf="cardNumber.errors?.['pattern'] && cardNumber.touched" class="error">
+            Card number must be 16 digits.
+        </div>
     </div>
     <div>
         <label for="cardHolder">Card Holder:</label>
@@ -13,8 +16,12 @@
     </div>
     <div>
         <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" [(ngModel)]="cardCvv" name="cvv" required>
+        <input type="text" id="cvv" [(ngModel)]="cardCvv" name="cvv" #cvv="ngModel" required pattern="\d{3}">
+        <div *ngIf="cvv.errors?.['pattern'] && cvv.touched" class="error">
+            CVV must be 3 digits.
+        </div>
     </div>
-    <button (click)="submitCardCreation()" name="submit">Submit</button>
+    <button (click)="submitCardCreation()" name="submit" [disabled]="!cardForm.valid">Submit</button>
 </form>
+
 

@@ -1,0 +1,9 @@
+
+<ul>
+    <!-- BEGIN: Loop through the transactions list -->
+    <li *ngFor="let transaction of transactions">
+        <!-- Display transaction details -->
+        {{ "Transaction ID:" + transaction.transactionId }} <br> {{ "Date: " + (transaction.transactionDate | date: 'yyyy-MM-dd') }} <br> {{ transaction.amount | currency: 'USD' }}
+    </li>
+    <!-- END: Loop through the transactions list -->
+</ul>

@@ -3,6 +3,7 @@ package com.revature.revpay.services;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -13,12 +14,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.revature.revpay.entities.Account;
+import com.revature.revpay.entities.User;
 import com.revature.revpay.repositories.AccountRepository;
 
 public class AccountServiceTest {
 
     @Mock
     private AccountRepository accountRepository;
+
+    @Mock
+    private UserService userService;
 
     @InjectMocks
     private AccountService accountService;
@@ -30,87 +35,113 @@ public class AccountServiceTest {
 
     @Test
     public void testFindAccountById() {
-        // Arrange
-        int accountId = 1;
         Account account = new Account();
-        account.setAccountId(accountId);
-        when(accountRepository.findByAccountId(accountId)).thenReturn(Optional.of(account));
+        account.setAccountId(1);
+        account.setAccountType(true);
+        account.setAccountName("Savings");
+        account.setBalance(1000.0);
 
-        // Act
-        Account result = accountService.findAccountById(accountId);
+        when(accountRepository.findByAccountId(1)).thenReturn(Optional.of(account));
 
-        // Assert
+        Account result = accountService.findAccountById(1);
+
         assertEquals(account, result);
     }
 
     @Test
-    public void testFindAccountByUser_id() {
-        // Arrange
-        int userId = 1;
-        Account account = new Account();
-        account.setAccountId(1);
-        account.setUserId(userId);
-        when(accountRepository.findAllAccountsByUser_UserId(userId)).thenReturn(Set.of(account));
+    public void testFindAccountsByUserId() {
+        Account account1 = new Account();
+        account1.setAccountId(1);
+        account1.setAccountType(true);
+        account1.setAccountName("Savings");
+        account1.setBalance(1000.0);
 
-        // Act
-        Set<Account> result = accountService.findAccountsByUserId(userId);
+        Account account2 = new Account();
+        account2.setAccountId(2);
+        account2.setAccountType(false);
+        account2.setAccountName("Checking");
+        account2.setBalance(500.0);
 
-        // Assert
-        assertEquals(account, result);
+        Set<Account> accounts = new HashSet<>();
+        accounts.add(account1);
+        accounts.add(account2);
+
+        when(accountRepository.findAllAccountsByUserId(1)).thenReturn(accounts);
+
+        Set<Account> result = accountService.findAccountsByUserId(1);
+
+        assertEquals(accounts, result);
     }
 
     @Test
-    public void testFindAccountByAccount_type() {
-        // Arrange
-        boolean accountType = true;
+    public void testFindAccountByAccountType() {
         Account account = new Account();
         account.setAccountId(1);
-        account.setAccountType(accountType);
-        when(accountRepository.findByAccountType(accountType)).thenReturn(Optional.of(account));
+        account.setAccountType(true);
+        account.setAccountName("Savings");
+        account.setBalance(1000.0);
 
-        // Act
-        Account result = accountService.findAccountByAccount_type(accountType);
+        when(accountRepository.findByAccountType(true)).thenReturn(Optional.of(account));
 
-        // Assert
+        Account result = accountService.findAccountByAccountType(true);
+
         assertEquals(account, result);
     }
 
     @Test
     public void testAddAccount() {
-        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        user.setUsername("john_doe");
+        user.setEmail("john.doe@example.com");
+        user.setPhoneNumber("1234567890");
+
         Account account = new Account();
+        account.setAccountId(1);
+        account.setAccountType(true);
+        account.setAccountName("Savings");
+        account.setBalance(1000.0);
+
+        when(userService.findUserById(1)).thenReturn(user);
         when(accountRepository.save(account)).thenReturn(account);
 
-        // Act
-        Account result = accountService.addAccount(account);
+        Account result = accountService.addAccount(1, account);
 
-        // Assert
         assertEquals(account, result);
+        assertEquals(user, account.getUserId());
     }
 
     @Test
     public void testUpdateAccount() {
-        // Arrange
-        Account account = new Account();
-        when(accountRepository.save(account)).thenReturn(account);
+        Account existingAccount = new Account();
+        existingAccount.setAccountId(1);
+        existingAccount.setAccountType(true);
+        existingAccount.setAccountName("Savings");
+        existingAccount.setBalance(1000.0);
 
-        // Act
-        Account result = accountService.updateAccount(account);
+        Account updatedAccount = new Account();
+        updatedAccount.setAccountId(1);
+        updatedAccount.setAccountType(false);
+        updatedAccount.setAccountName("Checking");
+        updatedAccount.setBalance(500.0);
 
-        // Assert
-        assertEquals(account, result);
+        when(accountRepository.findByAccountId(1)).thenReturn(Optional.of(existingAccount));
+        when(accountRepository.save(existingAccount)).thenReturn(updatedAccount);
+
+        Account result = accountService.updateAccount(1, updatedAccount);
+
+        assertEquals(updatedAccount, result);
+        assertEquals(updatedAccount.getAccountType(), existingAccount.getAccountType());
+        assertEquals(updatedAccount.getAccountName(), existingAccount.getAccountName());
+        assertEquals(updatedAccount.getBalance(), existingAccount.getBalance());
     }
 
     @Test
     public void testDeleteAccount() {
-        // Arrange
-        int accountId = 1;
-        when(accountRepository.deleteByAccountId(accountId)).thenReturn(true);
+        when(accountRepository.deleteByAccountId(1)).thenReturn(true);
 
-        // Act
-        Boolean result = accountService.deleteAccount(accountId);
+        boolean result = accountService.deleteAccount(1);
 
-        // Assert
         assertTrue(result);
     }
 }

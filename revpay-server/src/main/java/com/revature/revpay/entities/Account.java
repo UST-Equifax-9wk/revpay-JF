@@ -16,6 +16,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+/**
+ * Represents an account entity in the system.
+ */
 @Entity
 @Table(name = "account")
 public class Account {
@@ -51,60 +54,131 @@ public class Account {
     @JsonManagedReference(value = "card_account")
     private Set<Card> cards;
 
-    public Account(Integer account_id, User user, String account_Name, Double balance, Boolean account_type, Set<Transaction> transactionsOut, Set<Transaction> transactionsIn, Set<Card> cards) {
-        this.accountId = account_id;
+    /**
+     * Constructs an Account object with the specified parameters.
+     * 
+     * @param accountId       the account ID
+     * @param user            the user associated with the account
+     * @param accountName     the name of the account
+     * @param balance         the balance of the account
+     * @param accountType     the type of the account (true for business, false for personal)
+     * @param transactionsOut the set of outgoing transactions associated with the account
+     * @param transactionsIn  the set of incoming transactions associated with the account
+     * @param cards           the set of cards associated with the account
+     */
+    public Account(Integer accountId, User user, String accountName, Double balance, Boolean accountType,
+            Set<Transaction> transactionsOut, Set<Transaction> transactionsIn, Set<Card> cards) {
+        this.accountId = accountId;
         this.userId = user;
+        this.accountName = accountName;
         this.balance = balance;
-        this.accountType = account_type;
-        this.accountName = account_Name;
+        this.accountType = accountType;
         this.transactionsOut = transactionsOut;
         this.transactionsIn = transactionsIn;
         this.cards = cards;
     }
 
+    /**
+     * Default constructor for the Account class.
+     */
     public Account() {
     }
 
+    /**
+     * Retrieves the account ID.
+     * 
+     * @return the account ID
+     */
     public Integer getAccountId() {
         return accountId;
     }
 
+    /**
+     * Sets the account ID.
+     * 
+     * @param accountId the account ID to set
+     */
     public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
+    /**
+     * Retrieves the user associated with the account.
+     * 
+     * @return the user associated with the account
+     */
     public User getUserId() {
         return userId;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    /**
+     * Sets the user associated with the account.
+     * 
+     * @param user the user to set
+     */
+    public void setUserId(User user) {
+        this.userId = user;
     }
 
+    /**
+     * Retrieves the name of the account.
+     * 
+     * @return the name of the account
+     */
     public String getAccountName() {
         return accountName;
     }
 
+    /**
+     * Sets the name of the account.
+     * 
+     * @param accountName the name of the account to set
+     */
     public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
 
+    /**
+     * Retrieves the balance of the account.
+     * 
+     * @return the balance of the account
+     */
     public Double getBalance() {
         return balance;
     }
 
+    /**
+     * Sets the balance of the account.
+     * 
+     * @param balance the balance of the account to set
+     */
     public void setBalance(Double balance) {
         this.balance = balance;
     }
 
+    /**
+     * Retrieves the type of the account.
+     * 
+     * @return the type of the account (true for business, false for personal)
+     */
     public Boolean getAccountType() {
         return accountType;
     }
 
+    /**
+     * Sets the type of the account.
+     * 
+     * @param accountType the type of the account to set (true for business, false for personal)
+     */
     public void setAccountType(Boolean accountType) {
         this.accountType = accountType;
     }
 
+    /**
+     * Returns a string representation of the Account object.
+     * 
+     * @return a string representation of the Account object
+     */
     @Override
     public String toString() {
         return "Account [accountId=" + accountId + ", userId=" + userId + ", accountName=" + accountName + ", balance="

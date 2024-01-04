@@ -11,6 +11,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Represents a loan entity in the system.
+ */
 @Entity
 @Table(name = "loan")
 public class Loan {
@@ -43,26 +46,60 @@ public class Loan {
     @Column(name = "dueDate", nullable = false)
     private String dueDate;
 
-    public Loan(Integer loan_id, Account account_id, Double loan_amount, String loan_status, String loan_date, Double interest_rate, String start_date, String due_date) {
-        this.loanId = loan_id;
-        this.accountId = account_id;
-        this.loanAmount = loan_amount;
-        this.loanStatus = loan_status;
-        this.loanDate = loan_date;
-        this.interestRate = interest_rate;
-        this.startDate = start_date;
-        this.dueDate = due_date;
+    /**
+     * Constructs a new Loan object with the specified parameters.
+     * 
+     * @param loanId       the ID of the loan
+     * @param accountId    the account ID associated with the loan
+     * @param loanAmount   the amount of the loan
+     * @param loanStatus   the status of the loan (approved, denied, pending)
+     * @param loanDate     the date of the loan
+     * @param interestRate the interest rate of the loan
+     * @param startDate    the start date of the loan
+     * @param dueDate      the due date of the loan
+     */
+    public Loan(Integer loanId, Account accountId, Double loanAmount, String loanStatus, String loanDate,
+            Double interestRate, String startDate, String dueDate) {
+        this.loanId = loanId;
+        this.accountId = accountId;
+        this.loanAmount = loanAmount;
+        this.loanStatus = loanStatus;
+        this.loanDate = loanDate;
+        this.interestRate = interestRate;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
     }
 
+    /**
+     * Default constructor for Loan class.
+     */
     public Loan() {
     }
 
-    public void setId(int i) {
+    /**
+     * Sets the ID of the loan.
+     * 
+     * @param loanId the ID of the loan
+     */
+    public void setId(int loanId) {
+        this.loanId = loanId;
     }
 
-    public void setAccountId(int i) {
+    /**
+     * Sets the account ID associated with the loan.
+     * 
+     * @param accountId the account ID associated with the loan
+     */
+    public void setAccountId(Account accountId) {
+        this.accountId = accountId;
     }
 
-    public void setAmount(double d) {
+    /**
+     * Sets the amount of the loan.
+     * 
+     * @param loanAmount the amount of the loan
+     */
+    public void setAmount(double loanAmount) {
+        this.loanAmount = loanAmount;
     }
 }

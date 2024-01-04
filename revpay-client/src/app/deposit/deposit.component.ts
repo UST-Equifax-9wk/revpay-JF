@@ -43,7 +43,6 @@ export class DepositComponent implements OnInit{
         let user = JSON.parse(JSON.stringify(response.body ? response.body : []));
         let hasAccount = user.accounts.find((account: { accountId: number; }) => account.accountId == this.accountId)
         this.account = user.accounts.find((account: { accountId: number; }) => account.accountId == this.accountId)
-        this.account.balance += this.balance;
         if (hasAccount) {
           console.log('Current user has an account with the specified ID');
         } else {
@@ -57,11 +56,11 @@ export class DepositComponent implements OnInit{
   }
   deposit() {
     this.currentUserService.deposit(this.accountId, {
-      accountName: this.account.accountName, accountType: this.account.accountType, balance: this.account.balance
+      accountName: this.account.accountName, accountType: this.account.accountType, balance: Number(this.account.balance) + this.balance
     }).subscribe({
       next: (response) => {
         console.log(response);
-        this.router.navigate(['../']);
+        //this.router.navigate(['../']);
       },
       error: (error) => {
         console.log(error);

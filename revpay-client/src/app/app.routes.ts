@@ -8,7 +8,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
-
+import { SendComponent } from './send/send.component';
+import { TransactionHistoryComponent } from './transaction-history/transaction-history.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent },
@@ -25,6 +26,14 @@ export const routes: Routes = [
             {
             path: 'deposit',
             component: DepositComponent
+            },
+            {
+            path: 'send',
+            component: SendComponent
+            },
+            {
+            path: 'transaction-history',
+            component: TransactionHistoryComponent
             }
         ]
         },

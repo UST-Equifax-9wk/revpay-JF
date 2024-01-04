@@ -1,0 +1,8 @@
+<form>
+    <label for="amount">Amount:</label>
+    <input type="text" appCurrencyFormat [(ngModel)]="balance" name = "send" required>
+    <label for="recipient">Recipient:</label>
+    <input type="text" [(ngModel)]="recipient" name = "recipient" required>
+
+    <button (click)="send()" type="submit">Send</button>
+</form>

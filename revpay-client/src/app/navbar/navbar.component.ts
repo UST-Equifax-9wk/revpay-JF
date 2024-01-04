@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,5 +9,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.sass'
 })
 export class NavbarComponent {
+  constructor(private router: Router) { 
+
+  }
+
+logOut() {
+  const date = new Date();
+  const name = 'username';
+  const value = document.cookie.split(';')[0].split('=')[1];
+  date.setTime(date.getTime());
+  const expires = `expires=${date.toUTCString()}`;
+  document.cookie = `${name}=${value};${expires};path=/`;
+  this.router.navigate(['/login']);
+    }
 
 }

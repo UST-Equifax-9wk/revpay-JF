@@ -14,6 +14,9 @@ import jakarta.persistence.Index;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+/**
+ * Represents a User entity in the application.
+ */
 @Entity
 @Table(name = "users", indexes = {@Index(columnList = "userId", unique = true)})
 public class User {
@@ -35,9 +38,14 @@ public class User {
     @JsonManagedReference(value = "user")
     private Set<Account> accounts;
 
-    //given both email and phone number are optional, we need to make sure that the user has at least one of them
-    //if they have neither, then they cannot be contacted
-    //if they have both, then they can be contacted by either
+    /**
+     * Constructs a User object with the given username, email, phone number, and accounts.
+     * 
+     * @param username The username of the user.
+     * @param email The email of the user.
+     * @param phone_number The phone number of the user.
+     * @param accounts The set of accounts associated with the user.
+     */
     public User(String username, String email, String phone_number, Set<Account> accounts) {
         this.username = username;
         this.email = email;
@@ -45,7 +53,13 @@ public class User {
         this.accounts = accounts;
     }
 
-    //if they have only one, then they can only be contacted by that one
+    /**
+     * Constructs a User object with the given username and contact information.
+     * The contact information can be either an email or a phone number.
+     * 
+     * @param username The username of the user.
+     * @param contact The contact information (email or phone number) of the user.
+     */
     public User(String username, String contact) {
         this.username = username;
         if(contact.contains("@"))
@@ -54,7 +68,9 @@ public class User {
             this.phoneNumber = contact;
     }
     
-    //empty constructor
+    /**
+     * Constructs an empty User object.
+     */
     public User() {
         super();
     }
