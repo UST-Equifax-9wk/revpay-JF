@@ -12,7 +12,10 @@
     </div>
     <div>
         <label for="expiryDate">Expiry Date:</label>
-        <input type="date" id="expiryDate" [(ngModel)]="cardExp" name="exp" required>
+        <input type="date" id="expiryDate" [(ngModel)]="cardExp" (ngModelChange)="validateExpiryDate()" name="exp" required>
+        <div *ngIf="isDateInvalid" class="error">
+            Expiry date must be in the future.
+        </div>
     </div>
     <div>
         <label for="cvv">CVV:</label>
@@ -21,7 +24,7 @@
             CVV must be 3 digits.
         </div>
     </div>
-    <button (click)="submitCardCreation()" name="submit" [disabled]="!cardForm.valid">Submit</button>
+    <button (click)="submitCardCreation()" name="submit" >Submit</button>
 </form>
 
 

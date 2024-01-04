@@ -56,11 +56,11 @@ export class DepositComponent implements OnInit{
   }
   deposit() {
     this.currentUserService.deposit(this.accountId, {
-      accountName: this.account.accountName, accountType: this.account.accountType, balance: Number(this.account.balance) + this.balance
+      accountName: this.account.accountName, accountType: this.account.accountType, balance: Number(this.account.balance) + Number(this.balance)
     }).subscribe({
       next: (response) => {
         console.log(response);
-        //this.router.navigate(['../']);
+        this.router.navigate(['../'], { relativeTo: this.route });
       },
       error: (error) => {
         console.log(error);

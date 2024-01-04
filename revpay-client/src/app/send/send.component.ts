@@ -67,7 +67,7 @@ export class SendComponent {
 
   widthdraw(): void {
     this.currentUserService.withdraw(this.accountId, {
-      accountName: this.sendingAccount.accountName, accountType: this.sendingAccount.accountType, balance: Number(this.sendingAccount.balance) - this.balance
+      accountName: this.sendingAccount.accountName, accountType: this.sendingAccount.accountType, balance: Number(this.sendingAccount.balance) - Number(this.balance)
     }).subscribe({
       next: (response) => {
         console.log(response);
@@ -80,7 +80,7 @@ export class SendComponent {
 
   deposit(): void {
     this.currentUserService.deposit(this.receivingAccount.accountId, {
-      accountName: this.receivingAccount.accountName, accountType: this.receivingAccount.accountType, balance: Number(this.receivingAccount.balance) + this.balance
+      accountName: this.receivingAccount.accountName, accountType: this.receivingAccount.accountType, balance: Number(this.receivingAccount.balance) + Number(this.balance)
     }).subscribe({
       next: (response) => {
         console.log(response);

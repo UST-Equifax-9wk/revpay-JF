@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentUserService } from '../current-user.service';
@@ -13,8 +13,8 @@ import { CurrentUserService } from '../current-user.service';
   templateUrl: './card-form.component.html',
   styleUrl: './card-form.component.sass'
 })
-export class CardFormComponent implements OnInit, OnDestroy {
-
+export class CardFormComponent implements OnInit {
+  isDateInvalid: boolean = false;
   cardHolder: string;
   cardNum: string;
   cardExp: string;
@@ -61,10 +61,18 @@ export class CardFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.accountSetup();
-  }
-    
+  validateExpiryDate(): void {
+    if (!this.cardExp) {
+        this.isDateInvalid = false;
+        return;
+    }
+
+    const inputDate = new Date(this.cardExp);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time part to compare only dates
+
+    this.isDateInvalid = inputDate <= today;
+}
 
     submitCardCreation() {
       console.log(this.cardHolder, this.cardNum, this.cardExp, this.cardCvv);
@@ -75,7 +83,7 @@ export class CardFormComponent implements OnInit, OnDestroy {
       }, this.accountId)
         .subscribe({
           next: (response) => {
-            this.router.navigate(['../']);
+            this.router.navigate(['../'], { relativeTo: this.route });
           },
           error: (error: HttpErrorResponse) => {
             console.log(error);
